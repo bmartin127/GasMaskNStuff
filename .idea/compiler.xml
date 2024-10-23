@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="PressureNStuff-forge-master.PressureNStuff-forge-master.main~1" target="17" />
+      <module name="PressureNStuff-forge-master.PressureNStuff-forge-master.test~1" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
