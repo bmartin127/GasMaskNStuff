@@ -20,11 +20,11 @@ public class GasMaskModel<T extends LivingEntity> extends AgeableListModel<T> {
 		this.mask = root.getChild("mask");
 	}
 
-	public static LayerDefinition createBodyLayer() {
-		MeshDefinition meshdefinition = new MeshDefinition();
-		PartDefinition partdefinition = meshdefinition.getRoot();
+	public static LayerDefinition createLayer() {
+		MeshDefinition mesh = new MeshDefinition();
+		PartDefinition part = mesh.getRoot();
 
-		PartDefinition mask = partdefinition.addOrReplaceChild("mask", CubeListBuilder.create().texOffs(32, 32).addBox(-4.0F, -32.0F, -5.0F, 8.0F, 8.0F, 1.0F, new CubeDeformation(0.0F))
+		PartDefinition mask = part.addOrReplaceChild("mask", CubeListBuilder.create().texOffs(32, 32).addBox(-4.0F, -32.0F, -5.0F, 8.0F, 8.0F, 1.0F, new CubeDeformation(0.0F))
 		.texOffs(32, 41).addBox(-4.0F, -26.0F, -4.0F, 0.0F, 1.0F, 8.0F, new CubeDeformation(0.0F))
 		.texOffs(0, 48).addBox(-4.0F, -31.0F, -4.0F, 0.0F, 1.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
@@ -40,7 +40,7 @@ public class GasMaskModel<T extends LivingEntity> extends AgeableListModel<T> {
 		PartDefinition cube_r5 = mask.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(16, 48).addBox(-1.0F, -1.0F, 0.0F, 0.0F, 1.0F, 8.0F, new CubeDeformation(0.0F))
 		.texOffs(48, 0).addBox(-1.0F, -6.0F, 0.0F, 0.0F, 1.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(3.0F, -25.0F, 4.0F, 0.0F, 3.1416F, 0.0F));
 
-		return LayerDefinition.create(meshdefinition, 64, 64);
+		return LayerDefinition.create(mesh, 64, 64);
 	}
 
 
@@ -61,4 +61,6 @@ public class GasMaskModel<T extends LivingEntity> extends AgeableListModel<T> {
 	public void setupAnim(T t, float v, float v1, float v2, float v3, float v4) {
 
 	}
+
+
 }

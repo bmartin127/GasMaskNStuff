@@ -1,6 +1,7 @@
 package com.axolotl.pressureandstuff;
 
 import com.axolotl.pressureandstuff.client.CuriosLayerDefinitions;
+import com.axolotl.pressureandstuff.client.model.GasMaskModel;
 import com.axolotl.pressureandstuff.client.render.GasMaskRenderer;
 import com.axolotl.pressureandstuff.item.ModIItems;
 import com.axolotl.pressureandstuff.item.ModItemGroups;
@@ -8,6 +9,7 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -52,6 +54,7 @@ public class PressureAndStuff
         MinecraftForge.EVENT_BUS.register(this);
 
         // Register the item to a creative tab
+        bus.addListener(this::registerLayers);
         bus.addListener(this::addCreative);
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
@@ -85,12 +88,12 @@ public class PressureAndStuff
         // Do something when the server starts
         LOGGER.info("HELLO from server starting");
     }
-    @SubscribeEvent
-    public static void onClientSetup(FMLClientSetupEvent event)
-    {
-        CuriosRendererRegistry.register(ModIItems.GAS_DEBUGGER.get(), GasMaskRenderer::new);
+   // @SubscribeEvent
+    //private void ClientSetup(final FMLClientSetupEvent evt)
+    //{
 
-    }
+
+    //}
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -102,7 +105,13 @@ public class PressureAndStuff
             // Some client setup code
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+            LOGGER.info("Registering curios renderers");
+            CuriosRendererRegistry.register(ModIItems.GAS_DEBUGGER.get(), GasMaskRenderer::new);
+
         }
     }
+    private void registerLayers(final EntityRenderersEvent.RegisterLayerDefinitions evt) {
+        evt.registerLayerDefinition(CuriosLayerDefinitions.GAS_MASK, GasMaskModel::createLayer);
 
+    }
 }
